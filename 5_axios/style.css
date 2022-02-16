@@ -39,7 +39,7 @@ header input {
     color: white;
     font-size: 1rem;
     font-weight: 300;
-    transition: all 0.4 ease-out;
+    transition: all 0.4s ease-out;
 }
 
 header input:focus {

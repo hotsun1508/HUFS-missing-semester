@@ -1,25 +1,35 @@
 const api = {
-    key: "648997643def8615636111326d4ef8a1",
+    key: "81b07fd757c71884477cb0d013b56d32",
     baseurl: "https://api.openweathermap.org/data/2.5",
 };
 
 const searchInput = document.querySelector(".search-input");
 searchInput.addEventListener("keypress", setQuery);
 
+// * enter Key 입력시 getResults 함수 실행
 function setQuery(e) {
-    if (e.keyCode == 13) {
+    if (e.keyCode == 13) { // keyCode는 키보드 입력값. 코드 13은 enter key에 해당됨.
         getResults(searchInput.value);
         //console.log(searchInput.value);
     }
 }
-// api.openweathermap.org/data/2.5/weather?q=London,uk&APPID=648997643def8615636111326d4ef8a1
+
+// * API Call & displayResults function Call
 function getResults(query) {
+    // fetch(`${api.baseurl}/weather?q=${query}&APPID=${api.key}&units=metric`)
+    //     .then((weather) => {
+    //         return weather.json()
+    //     })
+    //     .then((weather) => displayResults(weather))
+    //     .catch((err) => console.log("Error"));
+
     axios
         .get(`${api.baseurl}/weather?q=${query}&APPID=${api.key}&units=metric`)
         .then((weather) => displayResults(weather.data))
-        .catch((err) => showError(query));
+        .catch((err) => console.log(err));
 }
 
+// * class 선택 & innerText로 weather 주입
 function displayResults(weather) {
     //console.log(weather);
     let city = document.querySelector(".location .city");
@@ -42,6 +52,7 @@ function displayResults(weather) {
     )}°c`;
 }
 
+// * DateFormatter
 function dateBuilder(d) {
     let months = [
         "January",
@@ -73,12 +84,4 @@ function dateBuilder(d) {
     let year = d.getFullYear();
 
     return `${day} ${date} ${month} ${year}`;
-}
-
-function showError(err) {
-    Swal.fire({
-        icon: "error",
-        title: "Oops...",
-        text: `${err} is not a city`,
-    });
 }
