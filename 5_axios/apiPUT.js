@@ -6,10 +6,12 @@ const putData = {
     "completed": true
 }
 
-axios.put('http://localhost:8001/todos/5', putData)
-    .then((response) => {
+axios({
+    url: 'http://localhost:8001/todos/5',
+    method: 'PUT',
+    data: putData
+})
+    .then(response => {
         console.log(response.data)
     })
-    .catch((error) => {
-        console.log(error)
-    })
+    .catch((err) => console.log(err));

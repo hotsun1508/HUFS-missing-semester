@@ -4,10 +4,12 @@ const patchData = {
     "content": "Julia"
 }
 
-axios.patch('http://localhost:8001/todos/a5', patchData)
-    .then((response) => {
+axios({
+    url: 'http://localhost:8001/todos/5',
+    method: 'PUT',
+    data: patchData
+})
+    .then(response => {
         console.log(response.data)
     })
-    .catch((error) => {
-        console.log(error)
-    })
+    .catch((err) => console.log(err));

@@ -23,10 +23,16 @@ function getResults(query) {
     //     .then((weather) => displayResults(weather))
     //     .catch((err) => console.log("Error"));
 
-    axios
-        .get(`${api.baseurl}/weather?q=${query}&APPID=${api.key}&units=metric`)
-        .then((weather) => displayResults(weather.data))
+    axios({
+        url: `${api.baseurl}/weather?q=${query}&APPID=${api.key}&units=metric`,
+        method: 'GET',
+    }).then((weather) => displayResults(weather.data))
         .catch((err) => console.log(err));
+
+    // axios
+    //     .get(`${api.baseurl}/weather?q=${query}&APPID=${api.key}&units=metric`)
+    //     .then((weather) => displayResults(weather.data))
+    //     .catch((err) => console.log(err));
 }
 
 // * class 선택 & innerText로 weather 주입
