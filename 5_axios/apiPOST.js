@@ -6,11 +6,12 @@ const postData = {
     "completed": false
 };
 
-
-axios.post('http://localhost:8001/todos', postData)
-    .then((response)=> {
+axios({
+    url: 'http://localhost:8001/todos',
+    method: 'POST',
+    data: postData
+})
+    .then(response => {
         console.log(response.data)
     })
-    .catch((error)=> {
-        console.log(error)
-    })
+    .catch((err) => console.log(err));
